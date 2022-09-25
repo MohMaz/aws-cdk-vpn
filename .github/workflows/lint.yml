@@ -1,10 +1,8 @@
 name: Lint
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
-    branches:
+    branches-ignore:
       - master
   pull_request:
     branches:
@@ -20,12 +18,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install Python dependencies
         run: make install-dev
 
       - name: Run linters
-        uses: make lint
+        run: make lint
