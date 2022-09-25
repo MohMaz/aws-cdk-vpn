@@ -23,3 +23,7 @@ cdk diff
 # Check the diff log
 cdk deploy
 ```
+
+
+# Run VPN Server
+Run the scripts in `commands.sh` in the server to run the vpn server
