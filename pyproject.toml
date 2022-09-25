@@ -1,0 +1,84 @@
+[project]
+name = "aws-cdk-vpn"
+version = "0.1.0"
+description = "Create a pyproject.toml file for an existing project."
+authors = [
+    {name = "Martin Thoma", email="info@martin-thoma.de"},
+    {email = "info@example.com"}
+]
+license = {file = "LICENSE.txt"}
+readme = "README.md"
+requires-python = ">=3.10"
+
+keywords = ["packaging", "dependency", "infer", "pyproject.toml"]
+
+classifiers = [
+    "Topic :: Software Development"
+]
+
+# Requirements: This is done differently by poetry!
+dependencies = [
+    "Click>=7.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=18.3-alpha.0",
+]
+
+[project.urls]
+homepage = "https://github.com/MartinThoma/infer_pyproject"
+documentation = "https://github.com/MartinThoma/infer_pyproject"
+repository = "https://github.com/MartinThoma/infer_pyproject"
+
+[project.scripts]
+poetry = "infer_pyproject.cli:main"
+
+[build-system]
+requires = [
+    "setuptools >= 35.0.2",
+    "setuptools_scm >= 2.0.0, <3"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target_version = ['py36']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[tool.isort]
+atomic = true
+profile = "black"
+skip_gitignore = true
+skip_glob = ["src/blib2to3", "tests/data", "profiling"]
+known_first_party = ["black", "blib2to3", "blackd", "_black_version"]
+
+[tool.mypy]
+python_version = 3.9
+strict = true
+follow_imports = "silent"
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+allow_incomplete_defs = true
+allow_untyped_calls = true
